@@ -32,3 +32,12 @@ def baseline_model2(X,value=49.11):
     y_predict[(X["STATUS"] != "SCH") & (X["STATUS"] != "DEL")] = value
 
     return y_predict
+
+##############################################################
+
+def get_accuracy(y_true,y_predict,plusminus=10):
+    
+    inrange = np.zeros(len(y_true))
+    inrange[((y_true-plusminus) <= y_predict) & (y_predict <= (y_true+plusminus))] = 1
+
+    return (sum(inrange)/len(y_true))
